@@ -10,13 +10,13 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
@@ -46,7 +46,10 @@
     <TypeScriptCompile Include="require.d.ts" />
     <TypeScriptCompile Include="ResourceManager.ts" />
     <TypeScriptCompile Include="Rocket.ts" />
+    <TypeScriptCompile Include="Row.ts" />
+    <TypeScriptCompile Include="Screen.ts" />
     <TypeScriptCompile Include="SpringBear.ts" />
+    <TypeScriptCompile Include="Tile.ts" />
     <TypeScriptCompile Include="WhirlWind.ts" />
     <TypeScriptCompile Include="WoodLouse.ts" />
   </ItemGroup>
@@ -59,12 +62,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

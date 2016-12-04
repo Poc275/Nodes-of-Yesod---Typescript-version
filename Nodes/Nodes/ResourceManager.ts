@@ -12,8 +12,10 @@ import RedSpaceman = require("RedSpaceman");
 import SpringBear = require("SpringBear");
 import WhirlWind = require("WhirlWind");
 import WoodLouse = require("WoodLouse");
-
 import Enemy = require("Enemy");
+
+import Screen = require("Screen");
+
 
 class ResourceManager {
 
@@ -32,6 +34,8 @@ class ResourceManager {
     private test1: Array<number>;
     private mToTheEnemies: Array<number>[];
  //   private ToTheUnderGround: Array<number[]>;
+
+    private mScreens: Array<Screen>;
 
     constructor(gameSprites, enemies, walls, platform, ctx) {
 
@@ -102,10 +106,44 @@ class ResourceManager {
             1, 2, 3, 1, 2, 3, 1, 3, 2, 1, 1);   //15
 
         this.mEnemies = new Array();
-      //  this.mToTheEnemies = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-      //  this.ToTheUnderGround = new Array();
+        //  this.mToTheEnemies = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        //  this.ToTheUnderGround = new Array();
+
+        var jsonLevels;
+        var levels: string;
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", "/levels/levels-json.txt", true);
+        rawFile.send();
+        rawFile.onreadystatechange = function () {
+            if (rawFile.readyState === 4) {
+                if (rawFile.status === 200 || rawFile.status === 0) {
+                    levels = rawFile.responseText;
+                    // TODO - parse JSON into actual Row/Tile objects
+                    // at the moment this is parsed into a standard Object
+                    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                    // http://stackoverflow.com/questions/34031448/typescript-typeerror-myclass-myfunction-is-not-a-function
+                    // http://stackoverflow.com/questions/22875636/how-do-i-cast-a-json-object-to-a-typescript-class
+                    // http://choly.ca/post/typescript-json/
+                    jsonLevels = JSON.parse(levels);
+                    //this.mScreens.copyInto(jsonLevels);
+                    //console.log(jsonLevels);
+                    this.mScreens = jsonLevels;
+                    console.log(this.mScreens);
+
+                    this.mScreens.forEach(function (screen) {
+                        screen.Rows.forEach(function (row) {
+                            //console.log(row.GetTilesAsciiArray());
+                        });
+                        //    screen.Rows.forEach(function(row) {
+                        //        this.levels[counter] = row.Tiles;
+                        //    });
+                    });
+                }
+            }
+        };
 
         this.levels = new Array();
+
         this.levels[0] = [4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4]; //0
         this.levels[1] = [4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4]; //0
         this.levels[2] = [4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4]; //0
